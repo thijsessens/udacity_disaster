@@ -2,8 +2,8 @@
 
 ### Summary
 This repository contains a classification engine in a web app to identify how a message relates best to 36 different categories. The web app should look like this:
-![image of web app]
-(https://github.com/thijsessens/udacity_disaster/blob/master/images/web_app_image.png)
+
+![web_app_image](images/web_app_image.png) 
 
 ### Data set
 There are two datasets in this repository.
