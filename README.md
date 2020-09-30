@@ -1,5 +1,30 @@
 # Disaster Response Pipeline Project
 
+### Summary
+This repository contains a classification engine in a web app to identify how a message relates best to 36 different categories. The web app should look like this:
+![image of web app]
+(https://github.com/thijsessens/udacity_disaster/blob/master/images/web_app_image.png)
+
+### Data set
+There are two datasets in this repository.
+
+1. messages.csv
+The messages contains the our dependent variable. We want to be able to classify some message into 36 different categories. 
+
+2. categories.csv
+This data set contains the flagged categories, to train our model on. 
+
+### Cleaning the data
+We need to go through a few steps to make our data set usefull. 
+
+The categories column is a string with this structure: "related-0;request-0;offer-0;aid_related-0;medi..."
+Therefore we need to go through a couple steps:
+1. Split the string between ";" and create separate columns per split out string
+2. Collumn names need to be the string without the last two characters of the string
+3. The value needs to be only the last character of the string
+
+Finally we merge everything back together and drop the duplicates. 
+
 ### Instructions:
 1. Run the following commands in the project's root directory to set up your database and model.
 
