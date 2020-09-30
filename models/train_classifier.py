@@ -1,5 +1,4 @@
 import sys
-# import libraries
 import pandas as pd
 import numpy as np
 import pickle
@@ -24,6 +23,8 @@ from nltk.stem import WordNetLemmatizer
 
 
 def load_data(database_filepath):
+    '''this function loads data from sqlite database'''
+    
     # connect to engine sqlalchemy
     engine = create_engine('sqlite:///'+database_filepath)
     
@@ -39,6 +40,8 @@ def load_data(database_filepath):
 
 
 def tokenize(text):
+    '''this function creates tokens from words'''
+    
     # detect url 
     url_regex = 'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'
     detected_urls = re.findall(url_regex, text)
@@ -59,6 +62,8 @@ def tokenize(text):
 
 
 def build_model():
+    '''this function initiates the model as a pipeline'''
+    
     # initiate pipeline
     pipeline = Pipeline([
         ('vect', CountVectorizer(tokenizer=tokenize)),
@@ -70,6 +75,8 @@ def build_model():
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
+    '''this function evaluates the model through classification_report'''
+    
     # create predictions to from X_test
     Y_pred = model.predict(X_test)
     
@@ -85,11 +92,15 @@ def evaluate_model(model, X_test, Y_test, category_names):
 
 
 def save_model(model, model_filepath):
+    '''this function saves the model on pickle'''
+    
     # save the model to disk
     pickle.dump(model, open(model_filepath, 'wb'))
 
 
 def main():
+    '''this is the main function'''
+    
     if len(sys.argv) == 3:
         database_filepath, model_filepath = sys.argv[1:]
         print('Loading data...\n    DATABASE: {}'.format(database_filepath))
