@@ -71,8 +71,14 @@ def build_model():
         ('clf', MultiOutputClassifier(RandomForestClassifier()))
     ])
     
-    return pipeline
+    parameters = {'clf__estimator__n_estimators': (30,40),
+               'clf__estimator__max_depth': (2,3),
+               'clf__estimator__min_samples_leaf': (2,3)
+              }
+    
+    cv = GridSearchCV(pipeline, param_grid=parameters)
 
+    return cv
 
 def evaluate_model(model, X_test, Y_test, category_names):
     '''this function evaluates the model through classification_report'''
