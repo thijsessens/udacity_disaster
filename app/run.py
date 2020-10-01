@@ -33,18 +33,15 @@ df = pd.read_sql_table('data', engine)
 model = joblib.load("../models/classifier.pkl")
 
 
-# index webpage displays cool visuals and receives user input text for model
 @app.route('/')
 @app.route('/index')
 def index():
     
     # extract data needed for visuals
-    # TODO: Below is an example - modify to extract data for your own visuals
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
     
     # create visuals
-    # TODO: Below is an example - modify to create your own visuals
     graphs = [
         {
             'data': [
@@ -84,7 +81,7 @@ def go():
     classification_labels = model.predict([query])[0]
     classification_results = dict(zip(df.columns[4:], classification_labels))
 
-    # This will render the go.html Please see that file. 
+    # This will render the go.html 
     return render_template(
         'go.html',
         query=query,
